@@ -16,6 +16,11 @@ def cadastrar_produto():
         cadastro = input("Deseja cadastrar outro produto? (S/N): ").upper()
         if cadastro == "N":
             break
+        elif cadastro == "S": 
+            continue
+        else:
+            print("Opção inválida. Voltando ao menu principal.")
+            break
 
 def listar_produtos():
     if len(produtos) == 0:
@@ -41,11 +46,30 @@ def deletar_produto():
     if not encontrado:
         print("Produto não encontrado.")
 
+def buscar_produto():
+    nome_procurado = input("Digite o nome do produto que deseja procurar: ").upper()
+    encontrado = False
+    produtos_encontrados = 0
+    for produto in produtos:
+        if nome_procurado in produto["nome"]:
+            print(f"Produto encontrado: {produto['nome']}")
+            print(f"Preço: {produto['preço']}")
+            print(f"Quantidade: {produto['quantidade']}")
+            print(f"Tamanho: {produto['tamanho']}")
+            print("------------------------")
+            encontrado = True
+            produtos_encontrados += 1
+    if encontrado == False:
+        print("Produto não encontrado.")
+    else:
+        print(f"Total de produtos encontrados: {produtos_encontrados}")
+
 while True:
     print("1 - Cadastrar produto")
     print("2 - Listar produtos")
     print("3 - Deletar produto")
-    print("4 - Sair")
+    print("4 - Buscar produto")
+    print("5 - Sair")
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
@@ -55,6 +79,9 @@ while True:
     elif opcao == "3":
         deletar_produto()
     elif opcao == "4":
+        buscar_produto()
+    elif opcao == "5":
         print("Saindo do programa...")
         break
-    
+    else:
+        print("Opção inválida. Tente novamente.")

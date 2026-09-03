@@ -19,7 +19,7 @@ produtos = [
 
 nome_procurado = input("Digite o nome do produto que deseja buscar: ").lower()
 encontrado = False
-quantidade_encontrada = 0 
+produtos_encontrados = 0 
 for produto in produtos:
     if nome_procurado in produto["nome"].lower():
             print(f"Produto encontrado: {produto['nome']}")
@@ -27,10 +27,10 @@ for produto in produtos:
             print(f"quantidade: {produto['quantidade']}")
             print(f"tamanho: {produto['tamanho']}")
             encontrado = True
-            quantidade_encontrada += 1
+            produtos_encontrados += 1
 
 
 if encontrado == False:
     print("Produto não encontrado.")
 else:
-    print(f"Quantidade total encontrada: {quantidade_encontrada}")
+    print(f"Quantidade total encontrada: {produtos_encontrados}")

@@ -32,5 +32,3 @@ for produto in produtos:
 
 if encontrado == False:
     print("Produto não encontrado.")
-else:
-    print(f"Quantidade total encontrada: {produtos_encontrados}")

@@ -74,6 +74,7 @@ def adicionar_estoque():
             produto["quantidade"] += quantidade_adicional
             print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
             encontrado = True
+            break
 
     if not encontrado:
         print("Produto não encontrado.")

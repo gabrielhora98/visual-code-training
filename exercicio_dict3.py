@@ -79,13 +79,33 @@ def adicionar_estoque():
     if not encontrado:
         print("Produto não encontrado.")
 
+def retirar_estoque():
+    nome_procurado = input("Digite o nome do produto que deseja retirar do estoque: ").strip().upper()
+    tamanho_procurado = input("Digite o tamanho do produto que deseja retirar do estoque: ").strip().upper()
+    encontrado = False
+    for produto in produtos:
+        if nome_procurado == produto['nome'].upper() and tamanho_procurado == produto['tamanho'].upper():
+            quantidade_retirada = int(input("Digite a quantidade que deseja retirar: "))
+            if quantidade_retirada <= produto['quantidade']:
+                produto['quantidade'] -= quantidade_retirada
+                print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
+                encontrado = True
+                break
+            else:
+                print("Quantidade insuficiente em estoque.")
+                encontrado = True
+                break            
+    if not encontrado:
+        print("Produto não encontrado.")
+
 while True:
     print("1 - Cadastrar produto")
     print("2 - Listar produtos")
     print("3 - Deletar produto")
     print("4 - Buscar produto")
     print("5 - Adicionar estoque")
-    print("6 - Sair")
+    print("6 - Retirar estoque")
+    print("7 - Sair")
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
@@ -99,6 +119,8 @@ while True:
     elif opcao == "5":
         adicionar_estoque()
     elif opcao == "6":
+        retirar_estoque()
+    elif opcao == "7":
         print("Saindo do programa...")
         break
     else:

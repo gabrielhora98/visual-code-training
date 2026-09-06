@@ -66,9 +66,10 @@ def buscar_produto():
 
 def adicionar_estoque():
     nome_procurado = input("Digite o nome do produto que desea adicionar estoque: ").upper().strip()
+    tamanho_procurado = input("Digite o tamanho do produto que deseja adicionar estoque: ").upper().strip()
     encontrado = False
     for produto in produtos:
-        if nome_procurado == produto["nome"].upper():
+        if nome_procurado == produto["nome"].upper() and tamanho_procurado == produto['tamanho'].upper().strip():
             quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
             produto["quantidade"] += quantidade_adicional
             print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")

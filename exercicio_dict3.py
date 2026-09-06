@@ -2,10 +2,10 @@ produtos = []
 
 def cadastrar_produto():
     while True:
-        nome = input("Digite o nome do produto: ").upper()
+        nome = input("Digite o nome do produto: ").upper().strip()
         preço = float(input("Digite o preço do produto: "))
         quantidade = int(input("Digite a quantidade do produto: "))
-        tamanho = input("Digite o tamanho do produto: ").upper()
+        tamanho = input("Digite o tamanho do produto: ").upper().strip()
     
         produto = {"nome": nome,
                     "preço": preço,
@@ -13,7 +13,7 @@ def cadastrar_produto():
                     "tamanho": tamanho}
         produtos.append(produto)
     
-        cadastro = input("Deseja cadastrar outro produto? (S/N): ").upper()
+        cadastro = input("Deseja cadastrar outro produto? (S/N): ").upper().strip()
         if cadastro == "N":
             break
         elif cadastro == "S": 
@@ -35,7 +35,7 @@ def listar_produtos():
 
 
 def deletar_produto():
-    nome_procurado = input("Digite o nome do produto que deseja deletar: ").upper()
+    nome_procurado = input("Digite o nome do produto que deseja deletar: ").upper().strip()
     encontrado = False
     for produto in produtos:
         if nome_procurado == produto["nome"]:
@@ -47,7 +47,7 @@ def deletar_produto():
         print("Produto não encontrado.")
 
 def buscar_produto():
-    nome_procurado = input("Digite o nome do produto que deseja procurar: ").upper()
+    nome_procurado = input("Digite o nome do produto que deseja procurar: ").strip().upper()
     encontrado = False
     produtos_encontrados = 0
     for produto in produtos:
@@ -64,12 +64,26 @@ def buscar_produto():
     else:
         print(f"Total de produtos encontrados: {produtos_encontrados}")
 
+def adicionar_estoque():
+    nome_procurado = input("Digite o nome do produto que desea adicionar estoque: ").upper().strip()
+    encontrado = False
+    for produto in produtos:
+        if nome_procurado == produto["nome"].upper():
+            quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+            produto["quantidade"] += quantidade_adicional
+            print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
+            encontrado = True
+
+    if not encontrado:
+        print("Produto não encontrado.")
+
 while True:
     print("1 - Cadastrar produto")
     print("2 - Listar produtos")
     print("3 - Deletar produto")
     print("4 - Buscar produto")
-    print("5 - Sair")
+    print("5 - Adicionar estoque")
+    print("6 - Sair")
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
@@ -81,6 +95,8 @@ while True:
     elif opcao == "4":
         buscar_produto()
     elif opcao == "5":
+        adicionar_estoque()
+    elif opcao == "6":
         print("Saindo do programa...")
         break
     else:

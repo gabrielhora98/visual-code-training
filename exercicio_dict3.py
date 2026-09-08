@@ -98,6 +98,24 @@ def retirar_estoque():
     if not encontrado:
         print("Produto não encontrado.")
 
+def editar_produto():
+    nome_procurado = input("Digite o nome do produto que deseja editar: ").strip().upper()
+    tamanho_procurado = input("Digite o tamanho do produto que deseja editar: ").strip().upper()
+    encontrado = False
+    for produto in produtos:
+        if nome_procurado == produto['nome'].upper() and tamanho_procurado == produto['tamanho'].upper():
+            novo_nome = input("Digite o novo nome do produto: ").strip().upper()
+            novo_preco = float(input("Digite o novo preço do produto: "))
+            novo_tamanho = input("Digite o novo tamanho do produto: ").strip().upper()
+            produto['nome'] = novo_nome
+            produto['preço'] = novo_preco
+            produto['tamanho'] = novo_tamanho
+            print("Produto atualizado com sucesso!")
+            encontrado = True
+            break
+    if not encontrado:
+        print("Produto não encontrado.")
+
 while True:
     print("1 - Cadastrar produto")
     print("2 - Listar produtos")

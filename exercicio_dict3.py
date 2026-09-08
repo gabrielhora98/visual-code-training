@@ -6,21 +6,36 @@ def cadastrar_produto():
         preço = float(input("Digite o preço do produto: "))
         quantidade = int(input("Digite a quantidade do produto: "))
         tamanho = input("Digite o tamanho do produto: ").upper().strip()
-    
-        produto = {"nome": nome,
-                    "preço": preço,
-                    "quantidade": quantidade,
-                    "tamanho": tamanho}
-        produtos.append(produto)
-    
+        encontrado = False
+        for produto in produtos:
+            if nome == produto['nome'] and tamanho == produto['tamanho']:
+                print("Produto já cadastrado!")
+                encontrado = True
+                resposta = input("Deseja adicionar a quantidade ao estoque? (S/N): ").upper().strip()
+                if resposta == "S":
+                    quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+                    produto['quantidade'] += quantidade_adicional
+                    print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
+                elif resposta == "N":
+                    print("Ok, o produto não foi alterado.")  
+                else:
+                    print("Opção inválida.")
+        
+        if not encontrado:                    
+            produto = {"nome": nome,
+                        "preço": preço,
+                        "quantidade": quantidade,
+                        "tamanho": tamanho}
+            produtos.append(produto)
+            print(f"Produto {nome} cadastrado com sucesso!")
+
         cadastro = input("Deseja cadastrar outro produto? (S/N): ").upper().strip()
         if cadastro == "N":
             break
         elif cadastro == "S": 
             continue
         else:
-            print("Opção inválida. Voltando ao menu principal.")
-            break
+            print("Opção inválida.")
 
 def listar_produtos():
     if len(produtos) == 0:
@@ -65,7 +80,7 @@ def buscar_produto():
         print(f"Total de produtos encontrados: {produtos_encontrados}")
 
 def adicionar_estoque():
-    nome_procurado = input("Digite o nome do produto que desea adicionar estoque: ").upper().strip()
+    nome_procurado = input("Digite o nome do produto que deseja adicionar estoque: ").upper().strip()
     tamanho_procurado = input("Digite o tamanho do produto que deseja adicionar estoque: ").upper().strip()
     encontrado = False
     for produto in produtos:

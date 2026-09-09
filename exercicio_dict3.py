@@ -1,5 +1,5 @@
-produtos = []
-
+produtos = []                               #estudar try/except
+                                            
 def cadastrar_produto():
     while True:
         nome = input("Digite o nome do produto: ").upper().strip()
@@ -11,15 +11,18 @@ def cadastrar_produto():
             if nome == produto['nome'] and tamanho == produto['tamanho']:
                 print("Produto já cadastrado!")
                 encontrado = True
-                resposta = input("Deseja adicionar a quantidade ao estoque? (S/N): ").upper().strip()
-                if resposta == "S":
-                    quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
-                    produto['quantidade'] += quantidade_adicional
-                    print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
-                elif resposta == "N":
-                    print("Ok, o produto não foi alterado.")  
-                else:
-                    print("Opção inválida.")
+                while True:
+                    resposta = input("Deseja adicionar a quantidade ao estoque? (S/N): ").upper().strip()
+                    if resposta == "S":
+                        quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+                        produto['quantidade'] += quantidade_adicional
+                        print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
+                        break
+                    elif resposta == "N":
+                        print("Ok, o produto não foi alterado.")
+                        break 
+                    else:
+                        print("Opção inválida.")   
         
         if not encontrado:                    
             produto = {"nome": nome,
@@ -28,14 +31,20 @@ def cadastrar_produto():
                         "tamanho": tamanho}
             produtos.append(produto)
             print(f"Produto {nome} cadastrado com sucesso!")
-
-        cadastro = input("Deseja cadastrar outro produto? (S/N): ").upper().strip()
-        if cadastro == "N":
+        sair = False
+        while True:
+            cadastro = input("Deseja cadastrar outro produto? (S/N): ").upper().strip()
+            if cadastro == "N":
+                sair = True
+                print("Voltando ao menu principal...")
+                break
+            elif cadastro == "S":
+                break
+            else:
+                print("Opção inválida.")
+        if sair:
             break
-        elif cadastro == "S": 
-            continue
-        else:
-            print("Opção inválida.")
+            
 
 def listar_produtos():
     if len(produtos) == 0:

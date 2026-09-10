@@ -1,11 +1,37 @@
-produtos = []                               #estudar try/except
+produtos = []
                                             
 def cadastrar_produto():
     while True:
-        nome = input("Digite o nome do produto: ").upper().strip()
-        preço = float(input("Digite o preço do produto: "))
-        quantidade = int(input("Digite a quantidade do produto: "))
-        tamanho = input("Digite o tamanho do produto: ").upper().strip()
+        while True:
+            nome = input("Digite o nome do produto: ").upper().strip()
+            if nome == "":
+                print("Nome inválido. O nome do produto não pode ser vazio.")
+            else:
+                break
+            while True:
+                try:
+                    preço = float(input("Digite o preço do produto: "))
+                    if preço <= 0:
+                        print("Preço inválido. O preço não pode ser zero ou negativo.")
+                    else:
+                        break
+                except ValueError:
+                    print("Preço inválido. Digite um número válido.")
+        while True:
+            try:
+                quantidade = int(input("Digite a quantidade do produto: "))
+                if quantidade <= 0:
+                    print("Quantidade inválida. A quantidade não pode ser zero ou negativa.")
+                else:
+                    break
+            except ValueError:
+                print("Quantidade inválida. Digite um número inteiro válido.")
+        while True:
+            tamanho = input("Digite o tamanho do produto: ").upper().strip()
+            if tamanho == "":
+                print("Tamanho inválido. O tamanho do produto não pode ser vazio.")
+            else:
+                break
         encontrado = False
         for produto in produtos:
             if nome == produto['nome'] and tamanho == produto['tamanho']:
@@ -14,7 +40,15 @@ def cadastrar_produto():
                 while True:
                     resposta = input("Deseja adicionar a quantidade ao estoque? (S/N): ").upper().strip()
                     if resposta == "S":
-                        quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+                        while True:
+                            try:
+                                quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+                                if quantidade_adicional <= 0:
+                                    print("Quantidade inválida. A quantidade adicional não pode ser zero ou negativa.")
+                                else:
+                                    break
+                            except ValueError:
+                                print("Quantidade inválida. Digite um número inteiro válido.")
                         produto['quantidade'] += quantidade_adicional
                         print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
                         break
@@ -89,12 +123,31 @@ def buscar_produto():
         print(f"Total de produtos encontrados: {produtos_encontrados}")
 
 def adicionar_estoque():
-    nome_procurado = input("Digite o nome do produto que deseja adicionar estoque: ").upper().strip()
-    tamanho_procurado = input("Digite o tamanho do produto que deseja adicionar estoque: ").upper().strip()
+    while True:
+        nome_procurado = input("Digite o nome do produto que deseja adicionar estoque: ").upper().strip()
+        if nome_procurado == "":
+            print("Nome inválido. O nome do produto não pode ser vazio.")
+        else:
+            break
+    while True:
+        tamanho_procurado = input("Digite o tamanho do produto que deseja adicionar estoque: ").upper().strip()
+        if tamanho_procurado == "":
+            print("Tamanho inválido. O tamanho do produto não pode ser vazio.")
+        else:
+            break
+
     encontrado = False
     for produto in produtos:
         if nome_procurado == produto["nome"].upper() and tamanho_procurado == produto['tamanho'].upper().strip():
-            quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+            while True:
+                try:
+                    quantidade_adicional = int(input("Digite a quantidade que deseja adicionar: "))
+                    if quantidade_adicional <= 0:
+                        print("Quantidade inválida. A quantidade adicional não pode ser zero ou negativa.")
+                    else:
+                        break
+                except ValueError:
+                    print("Quantidade inválida. Digite um número inteiro válido.")
             produto["quantidade"] += quantidade_adicional
             print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
             encontrado = True
@@ -104,12 +157,30 @@ def adicionar_estoque():
         print("Produto não encontrado.")
 
 def retirar_estoque():
-    nome_procurado = input("Digite o nome do produto que deseja retirar do estoque: ").strip().upper()
-    tamanho_procurado = input("Digite o tamanho do produto que deseja retirar do estoque: ").strip().upper()
+    while True:  
+        nome_procurado = input("Digite o nome do produto que deseja retirar do estoque: ").strip().upper()
+        if nome_procurado == "":
+            print("Nome inválido. O nome do produto não pode ser vazio.")   
+        else:
+            break
+    while True:
+        tamanho_procurado = input("Digite o tamanho do produto que deseja retirar do estoque: ").strip().upper()
+        if tamanho_procurado == "":
+            print("Tamanho inválido. O tamanho do produto não pode ser vazio.")
+        else:
+            break
     encontrado = False
     for produto in produtos:
         if nome_procurado == produto['nome'].upper() and tamanho_procurado == produto['tamanho'].upper():
-            quantidade_retirada = int(input("Digite a quantidade que deseja retirar: "))
+            while True:
+                try:
+                    quantidade_retirada = int(input("Digite a quantidade que deseja retirar: "))
+                    if quantidade_retirada <= 0:
+                        print("Quantidade inválida. A quantidade a ser retirada não pode ser zero ou negativa.")
+                    else:
+                        break
+                except ValueError:
+                    print("Quantidade inválida. Digite um número inteiro válido.")
             if quantidade_retirada <= produto['quantidade']:
                 produto['quantidade'] -= quantidade_retirada
                 print(f"Estoque atualizado. Nova quantidade de {produto['nome']}: {produto['quantidade']}")
@@ -123,14 +194,37 @@ def retirar_estoque():
         print("Produto não encontrado.")
 
 def editar_produto():
-    nome_procurado = input("Digite o nome do produto que deseja editar: ").strip().upper()
-    tamanho_procurado = input("Digite o tamanho do produto que deseja editar: ").strip().upper()
+    while True:
+        nome_procurado = input("Digite o nome do produto que deseja editar: ").strip().upper()
+        if nome_procurado == "":
+            print("Nome inválido. O nome do produto não pode ser vazio.")
+        else:
+            break
+    while True:
+        tamanho_procurado = input("Digite o tamanho do produto que deseja editar: ").strip().upper()
+        if tamanho_procurado == "":
+            print("Tamanho inválido. O tamanho do produto não pode ser vazio.")
+        else:
+            break
     encontrado = False
     for produto in produtos:
         if nome_procurado == produto['nome'].upper() and tamanho_procurado == produto['tamanho'].upper():
             novo_nome = input("Digite o novo nome do produto: ").strip().upper()
-            novo_preco = float(input("Digite o novo preço do produto: "))
-            novo_tamanho = input("Digite o novo tamanho do produto: ").strip().upper()
+            while True:
+                try:
+                    novo_preco = float(input("Digite o novo preço do produto: "))
+                    if novo_preco <= 0:
+                        print("Preço inválido. O preço não pode ser zero ou negativo.")
+                    else:
+                        break
+                except ValueError:
+                    print("Preço inválido. Digite um número válido.")
+            while True:
+                novo_tamanho = input("Digite o novo tamanho do produto: ").strip().upper()
+                if novo_tamanho == "":
+                    print("Tamanho inválido. O tamanho do produto não pode ser vazio.")
+                else:
+                    break
             produto['nome'] = novo_nome
             produto['preço'] = novo_preco
             produto['tamanho'] = novo_tamanho

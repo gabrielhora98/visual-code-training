@@ -241,7 +241,8 @@ while True:
     print("4 - Buscar produto")
     print("5 - Adicionar estoque")
     print("6 - Retirar estoque")
-    print("7 - Sair")
+    print("7 - Editar produto")
+    print("8 - Sair")
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
@@ -257,6 +258,8 @@ while True:
     elif opcao == "6":
         retirar_estoque()
     elif opcao == "7":
+        editar_produto()
+    elif opcao == "8":
         print("Saindo do programa...")
         break
     else:

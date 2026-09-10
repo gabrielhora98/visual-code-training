@@ -8,15 +8,15 @@ def cadastrar_produto():
                 print("Nome inválido. O nome do produto não pode ser vazio.")
             else:
                 break
-            while True:
-                try:
-                    preço = float(input("Digite o preço do produto: "))
-                    if preço <= 0:
-                        print("Preço inválido. O preço não pode ser zero ou negativo.")
-                    else:
-                        break
-                except ValueError:
-                    print("Preço inválido. Digite um número válido.")
+        while True:
+            try:
+                preço = float(input("Digite o preço do produto: "))
+                if preço <= 0:
+                    print("Preço inválido. O preço não pode ser zero ou negativo.")
+                else:
+                    break
+            except ValueError:
+                print("Preço inválido. Digite um número válido.")
         while True:
             try:
                 quantidade = int(input("Digite a quantidade do produto: "))

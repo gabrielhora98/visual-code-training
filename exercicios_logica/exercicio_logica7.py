@@ -3,14 +3,14 @@
 
 dia = (input("Hoje é domingo? S/N: ")).upper()
 
-if dia == "n":
+if dia == "N":
     dia = False
 else:
     dia = True
 
 mes = (input("Estamos em agosto? S/N: ")).upper()
 
-if mes == "n":
+if mes == "N":
     mes = False
 else:
     mes = True

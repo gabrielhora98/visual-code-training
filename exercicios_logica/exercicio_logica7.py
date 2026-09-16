@@ -15,6 +15,7 @@ if mes == "n":
 else:
     mes = True
 
+
 if dia == True and mes == True:
     print("Voce acertou o dia e o mes!")
 else:

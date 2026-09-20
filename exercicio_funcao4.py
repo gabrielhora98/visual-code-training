@@ -39,9 +39,13 @@ def vender_produto(estoque, quantidade_venda, quantidade_minima):
           estoque -= quantidade_venda
           resultado = verificar_estoque(estoque, quantidade_minima)
           print(f"{quantidade_venda} peça(s) vendida(s)")
-          return resultado
+          return resultado, estoque, quantidade_venda
     else:
-         return "Nao tem estoque o suficiente."
+         quantidade_venda = 0
+         return "Nao tem estoque o suficiente.", estoque, quantidade_venda
     
 
-print(vender_produto(5, 8, 3))
+situacao_estoque, estoque, quantidade_venda = vender_produto(5,8,3)
+print(situacao_estoque)
+print(estoque)
+print(quantidade_venda)

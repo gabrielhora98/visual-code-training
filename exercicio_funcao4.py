@@ -27,3 +27,21 @@
 #print(calcular_preco_final(500, 20, 15))
 #print(calcular_desconto(500, 20))
 #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx#
+
+def verificar_estoque(quantidade, quantidade_minima):
+    if quantidade >= quantidade_minima:
+        return "Estoque suficiente"
+    else:
+        return "Estoque baixo"
+
+def vender_produto(estoque, quantidade_venda, quantidade_minima):
+    if quantidade_venda <= estoque:
+          estoque -= quantidade_venda
+          resultado = verificar_estoque(estoque, quantidade_minima)
+          print(f"{quantidade_venda} peça(s) vendida(s)")
+          return resultado
+    else:
+         return "Nao tem estoque o suficiente."
+    
+
+print(vender_produto(5, 8, 3))
